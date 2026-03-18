@@ -19,15 +19,31 @@ Build a modern, visually stunning, and fully responsive website for showcasing t
 
 ---
 
-### 2. Hero Section (MOST IMPORTANT)
-- Fullscreen **background video**
-- Video should:
-  - Show the Nissan GT-R
-  - Include a smooth animation where the car visually "assembles" or reveals itself (dismental → assemble effect)
-- Overlay:
-  - Headline: "Experience the Power of the Nissan GT-R"
-  - Subtext: "Reserve Your Test Drive Today"
-  - CTA Button: "Book Test Drive"
+### 2. Section 1 — Title Section (Hero, MOST IMPORTANT)
+- **No video background** — pure black with subtle red ambient glow
+- Centred layout — **not** a 25/75 split, **not** a left-to-right animation
+- Headline: **"The New Experience BORN"** (Montserrat 900, large centred display)
+  - Line 1: "The New Experience" — white
+  - Line 2: "BORN" — red, wide letter-spacing, red glow shadow
+- Subtext: "Reserve Your Test Drive Today"
+- CTA Buttons: horizontal row, centred, never overlapping any section
+  - "Book Test Drive" (red solid)
+  - "View Specs ↓" (ghost outline)
+- Reveal: **fade-up** stagger (not left-to-right), fires 200 ms after page load
+- Scroll cue centred at bottom
+
+---
+
+### 2b. Section 2 — Video Section (Scroll-Triggered, Full-Screen)
+- **Immediately after** the title section, before Stats Band
+- `100vh` full-screen video — first video the user sees on scroll
+- **Clip-path reveal**: collapses to thin centre bar → expands full-screen on scroll-in
+- **Cinematic zoom-out**: video `scale(1.1)` → `scale(1)` as clip opens
+- **Seamless loop**: `vid.pause()` on exit (no reset) → resumes mid-loop on re-entry
+- **Re-triggers** every time section enters view (scroll up or down)
+- Text ("Engineered to Dominate") fades up with 0.65 s delay
+- Red corner bracket lines fade in after 1 s
+- `prefers-reduced-motion` skips animation, video still plays
 
 ---
 

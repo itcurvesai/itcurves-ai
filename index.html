@@ -46,50 +46,31 @@
   </nav>
 
   <!-- ══════════════════════════════════════════════
-       HERO — TEXT FLIES IN FROM LEFT OVER VIDEO
-       Layout: 25% text panel | 75% clear (video shows through)
+       SECTION 1 — TITLE: "The New Experience BORN"
+       Clean dark section — no video — centred layout
+       Fade-up reveal (not left-to-right)
   ══════════════════════════════════════════════ -->
   <section class="hero" id="home" aria-label="Hero">
 
-    <!-- Full-screen background video (behind everything) -->
-    <video
-      class="hero-vid"
-      autoplay muted loop playsinline
-      preload="metadata"
-      aria-hidden="true"
-    >
-      <source src="nissan-gtr-video.mp4" type="video/mp4" />
-    </video>
-
-    <!-- Full-screen cinematic overlays -->
-    <div class="hero-vignette"  aria-hidden="true"></div>
+    <!-- Subtle ambient red glow — no video in title section -->
+    <div class="hero-ambient"   aria-hidden="true"></div>
     <div class="hero-scanlines" aria-hidden="true"></div>
 
-    <!-- 25 / 75 split overlay — text panel flies in over the video -->
-    <div class="hero-split">
-
-      <!-- LEFT 25%: text panel slides in from left OVER the video -->
-      <div class="hero-panel" id="heroPanel">
-        <div class="hero-content">
-          <p  class="hero-eyebrow" data-reveal>THE LEGEND</p>
-          <h1 class="hero-title"   data-reveal>
-            BORN to<br/>
-            <em class="red-italic">Experience</em>
-          </h1>
-          <p class="hero-sub" data-reveal>Reserve Your Test Drive Today</p>
-          <div class="hero-ctas" data-reveal>
-            <a href="#reserve" class="btn btn-red">Book Test Drive</a>
-            <a href="#specs"   class="btn btn-ghost">View Specs ↓</a>
-          </div>
-        </div>
+    <!-- Centred title block — fade-up, not left-to-right -->
+    <div class="title-wrap">
+      <p class="hero-eyebrow" data-reveal>THE LEGEND</p>
+      <h1 class="hero-title" data-reveal>
+        The New Experience<br/>
+        <span class="title-born">BORN</span>
+      </h1>
+      <p class="hero-sub" data-reveal>Reserve Your Test Drive Today</p>
+      <div class="hero-ctas" data-reveal>
+        <a href="#reserve" class="btn btn-red">Book Test Drive</a>
+        <a href="#specs"   class="btn btn-ghost">View Specs ↓</a>
       </div>
-
-      <!-- RIGHT 75%: fully transparent — live video shows through -->
-      <div class="hero-clear" aria-hidden="true"></div>
-
     </div>
 
-    <!-- Scrolldown -->
+    <!-- Scroll cue -->
     <div class="scroll-cue" aria-hidden="true">
       <div class="scroll-cue-line"></div>
       <span>Scroll</span>
@@ -97,6 +78,39 @@
 
     <!-- Bottom fade to black -->
     <div class="hero-fade-bottom" aria-hidden="true"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 2 — VIDEO: scroll-triggered cinematic
+       Full-screen loop; appears as user scrolls in
+  ══════════════════════════════════════════════ -->
+  <section class="video-showcase" id="videoShowcase" aria-label="GT-R in motion">
+    <div class="video-showcase-inner" id="videoShowcaseInner">
+
+      <!-- Looping video — paused until scroll-in -->
+      <video
+        class="showcase-vid"
+        muted loop playsinline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="nissan-gtr-video.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Dark gradient overlay -->
+      <div class="showcase-overlay" aria-hidden="true"></div>
+
+      <!-- Minimal cinematic text -->
+      <div class="showcase-text">
+        <span class="label-tag">Nissan GT-R R35</span>
+        <h2 class="showcase-title">Engineered<br/><span class="red">to Dominate</span></h2>
+        <p class="showcase-sub">565 horsepower. All-wheel drive. Born on the Nürburgring.</p>
+      </div>
+
+      <!-- Decorative corner-frame lines -->
+      <div class="showcase-frame" aria-hidden="true"></div>
+
+    </div>
   </section>
 
   <!-- ══════════════════════════════════════════════

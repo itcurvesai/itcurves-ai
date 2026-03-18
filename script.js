@@ -98,27 +98,20 @@
 })();
 
 /* ══════════════════════════════════════════════
-   5. HERO REVEAL — panel slides in from left,
-      then content items stagger-fade inside it
+   5. HERO REVEAL — title section fade-up
+      Each element stagger-fades up from below.
+      No panel slide-in (title section has no panel).
 ══════════════════════════════════════════════ */
 (function initHeroReveal() {
-  const panel = document.getElementById('heroPanel');
   const items = document.querySelectorAll('[data-reveal]');
+  if (!items.length) return;
 
-  // Step 1 — slide the panel in from the left (short delay)
-  if (panel) {
-    setTimeout(() => panel.classList.add('slide-in'), 120);
-  }
-
-  // Step 2 — stagger-reveal the text items after the panel arrives
-  if (items.length) {
-    // Panel transition is 0.85s; start revealing content at ~0.55s into it
-    setTimeout(() => {
-      items.forEach((el, i) => {
-        setTimeout(() => el.classList.add('revealed'), i * 190);
-      });
-    }, 550);
-  }
+  // Stagger each title element with a clean fade-up
+  setTimeout(() => {
+    items.forEach((el, i) => {
+      setTimeout(() => el.classList.add('revealed'), i * 210);
+    });
+  }, 200);
 })();
 
 /* ══════════════════════════════════════════════
@@ -165,6 +158,48 @@
   }, { threshold: 0.1 });
 
   io.observe(video);
+})();
+
+/* ══════════════════════════════════════════════
+   6c. VIDEO SHOWCASE — cinematic scroll reveal
+       • clip-path expands from centre on scroll-in
+       • video plays seamlessly; pauses on exit
+       • re-triggers every time section enters view
+         (scroll up or down)
+══════════════════════════════════════════════ */
+(function initVideoShowcase() {
+  const section = document.getElementById('videoShowcase');
+  const inner   = document.getElementById('videoShowcaseInner');
+  const vid     = inner?.querySelector('.showcase-vid');
+  if (!section || !inner || !vid) return;
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // If user prefers reduced motion: skip clip-path animation, still play video
+  if (reduced) {
+    inner.classList.add('vs-revealed');
+  }
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Expand the clip + zoom out the video + fade text up
+        inner.classList.add('vs-revealed');
+        // Start (or resume) the seamless loop
+        vid.play().catch(() => {});
+      } else {
+        // Collapse back so the animation re-fires on next scroll-in
+        if (!reduced) inner.classList.remove('vs-revealed');
+        // Pause (not reset) — video resumes mid-loop for continuity
+        vid.pause();
+      }
+    });
+  }, {
+    // Trigger when at least 18% of the section is visible
+    threshold: 0.18,
+  });
+
+  io.observe(section);
 })();
 
 /* ══════════════════════════════════════════════
