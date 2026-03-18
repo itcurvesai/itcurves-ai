@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nissan GT-R | Reserve Your Test Drive</title>
+  <meta name="description" content="Experience the legendary Nissan GT-R. 565hp. 0–60 in 2.9s. Reserve your exclusive test drive today." />
+
+  <!-- Preconnect for font speed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       CURSOR
+  ══════════════════════════════════════════════ -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════════ -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+
+      <a href="#home" class="nav-logo" aria-label="GT-R Home">
+        <span>GT</span><span class="red">-R</span>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#home"     class="nav-item">Home</a></li>
+        <li><a href="#specs"    class="nav-item">Specs</a></li>
+        <li><a href="#features" class="nav-item">Features</a></li>
+        <li><a href="#reserve"  class="nav-item nav-book">Reserve</a></li>
+      </ul>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       HERO — TEXT FLIES IN FROM LEFT OVER VIDEO
+       Layout: 25% text panel | 75% clear (video shows through)
+  ══════════════════════════════════════════════ -->
+  <section class="hero" id="home" aria-label="Hero">
+
+    <!-- Full-screen background video (behind everything) -->
+    <video
+      class="hero-vid"
+      autoplay muted loop playsinline
+      preload="metadata"
+      aria-hidden="true"
+    >
+      <source src="nissan-gtr-video.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Full-screen cinematic overlays -->
+    <div class="hero-vignette"  aria-hidden="true"></div>
+    <div class="hero-scanlines" aria-hidden="true"></div>
+
+    <!-- 25 / 75 split overlay — text panel flies in over the video -->
+    <div class="hero-split">
+
+      <!-- LEFT 25%: text panel slides in from left OVER the video -->
+      <div class="hero-panel" id="heroPanel">
+        <div class="hero-content">
+          <p  class="hero-eyebrow" data-reveal>THE LEGEND</p>
+          <h1 class="hero-title"   data-reveal>
+            Experience<br/>
+            <em class="red-italic">the Power</em><br/>
+            of the GT-R
+          </h1>
+          <p class="hero-sub" data-reveal>Reserve Your Test Drive Today</p>
+          <div class="hero-ctas" data-reveal>
+            <a href="#reserve" class="btn btn-red">Book Test Drive</a>
+            <a href="#specs"   class="btn btn-ghost">View Specs ↓</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT 75%: fully transparent — live video shows through -->
+      <div class="hero-clear" aria-hidden="true"></div>
+
+    </div>
+
+    <!-- Scrolldown -->
+    <div class="scroll-cue" aria-hidden="true">
+      <div class="scroll-cue-line"></div>
+      <span>Scroll</span>
+    </div>
+
+    <!-- Bottom fade to black -->
+    <div class="hero-fade-bottom" aria-hidden="true"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       STATS BAND
+  ══════════════════════════════════════════════ -->
+  <section class="stats" aria-label="Key statistics">
+    <div class="stats-inner">
+
+      <div class="stat-item" data-count="565" data-suffix=" hp">
+        <span class="stat-num" id="stat0">0</span>
+        <span class="stat-label">Horsepower</span>
+      </div>
+
+      <div class="stat-divider" aria-hidden="true"></div>
+
+      <div class="stat-item" data-count="2.9" data-suffix="s" data-decimal="1">
+        <span class="stat-num" id="stat1">0</span>
+        <span class="stat-label">0 – 60 mph</span>
+      </div>
+
+      <div class="stat-divider" aria-hidden="true"></div>
+
+      <div class="stat-item" data-count="196" data-suffix=" mph">
+        <span class="stat-num" id="stat2">0</span>
+        <span class="stat-label">Top Speed</span>
+      </div>
+
+      <div class="stat-divider" aria-hidden="true"></div>
+
+      <div class="stat-item" data-count="3.8" data-suffix="L" data-decimal="1">
+        <span class="stat-num" id="stat3">0</span>
+        <span class="stat-label">Twin-Turbo V6</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       SPECS / SHOWCASE
+  ══════════════════════════════════════════════ -->
+  <section class="specs" id="specs" aria-label="Specifications">
+    <div class="specs-layout">
+
+      <!-- Left: big visual -->
+      <div class="specs-visual" aria-hidden="true">
+        <!-- SVG GT-R silhouette (shows as artistic placeholder when no image) -->
+        <div class="car-art">
+          <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%"   stop-color="#6B0000"/>
+                <stop offset="45%"  stop-color="#C40000"/>
+                <stop offset="100%" stop-color="#4A0000"/>
+              </linearGradient>
+              <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"  stop-color="#6EC6FF" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#1A6AFF" stop-opacity="0.1"/>
+              </linearGradient>
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <filter id="shadow">
+                <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#C40000" flood-opacity="0.3"/>
+              </filter>
+            </defs>
+
+            <!-- Ground glow -->
+            <ellipse cx="450" cy="310" rx="380" ry="22" fill="#C40000" opacity="0.12"/>
+            <!-- Ground reflection -->
+            <ellipse cx="450" cy="318" rx="340" ry="10" fill="#C40000" opacity="0.06"/>
+
+            <!-- Car body -->
+            <path d="M90 295 L115 205 L200 155 L360 128 L540 128 L660 142 L760 175 L800 220 L810 295 Z"
+              fill="url(#bodyGrad)" filter="url(#shadow)"/>
+
+            <!-- Roof panel -->
+            <path d="M230 155 L268 108 L420 88 L560 88 L640 118 L610 155 Z"
+              fill="#9A0000"/>
+
+            <!-- Roof highlight -->
+            <path d="M245 150 L278 112 L400 95 L540 95 L610 120 L580 150 Z"
+              fill="rgba(255,255,255,0.06)"/>
+
+            <!-- Windshield -->
+            <path d="M238 152 L272 110 L395 93 L395 152 Z"
+              fill="url(#glassGrad)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+
+            <!-- Rear window -->
+            <path d="M420 152 L420 92 L555 90 L615 118 L608 152 Z"
+              fill="url(#glassGrad)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+
+            <!-- Side window -->
+            <path d="M246 152 L258 168 L385 168 L395 152 Z"
+              fill="rgba(80,160,255,0.12)"/>
+            <path d="M425 168 L600 168 L605 152 L425 152 Z"
+              fill="rgba(80,160,255,0.10)"/>
+
+            <!-- Door line detail -->
+            <line x1="260" y1="168" x2="600" y2="172" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            <line x1="130" y1="230" x2="800" y2="238" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+            <!-- Front splitter -->
+            <path d="M90 295 L105 270 L130 260 L90 295" fill="#1a1a1a"/>
+            <!-- Rear diffuser -->
+            <path d="M810 295 L800 270 L780 262 L810 295" fill="#111"/>
+
+            <!-- Front bumper detail -->
+            <path d="M97 260 L115 215 L140 210" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+
+            <!-- Front wheel arch -->
+            <path d="M150 295 Q190 200 240 220 Q245 260 215 295 Z" fill="#0A0A0A"/>
+            <!-- Rear wheel arch -->
+            <path d="M640 295 Q680 195 740 215 Q755 260 720 295 Z" fill="#0A0A0A"/>
+
+            <!-- Front wheel -->
+            <circle cx="200" cy="295" r="58" fill="#0D0D0D" filter="url(#glow)"/>
+            <circle cx="200" cy="295" r="44" fill="#181818"/>
+            <circle cx="200" cy="295" r="28" fill="#0D0D0D"/>
+            <!-- Spokes -->
+            <line x1="200" y1="251" x2="200" y2="339" stroke="#2a2a2a" stroke-width="4"/>
+            <line x1="156" y1="295" x2="244" y2="295" stroke="#2a2a2a" stroke-width="4"/>
+            <line x1="169" y1="264" x2="231" y2="326" stroke="#2a2a2a" stroke-width="3"/>
+            <line x1="169" y1="326" x2="231" y2="264" stroke="#2a2a2a" stroke-width="3"/>
+            <circle cx="200" cy="295" r="10" fill="#C40000"/>
+
+            <!-- Rear wheel -->
+            <circle cx="690" cy="295" r="58" fill="#0D0D0D" filter="url(#glow)"/>
+            <circle cx="690" cy="295" r="44" fill="#181818"/>
+            <circle cx="690" cy="295" r="28" fill="#0D0D0D"/>
+            <line x1="690" y1="251" x2="690" y2="339" stroke="#2a2a2a" stroke-width="4"/>
+            <line x1="646" y1="295" x2="734" y2="295" stroke="#2a2a2a" stroke-width="4"/>
+            <line x1="659" y1="264" x2="721" y2="326" stroke="#2a2a2a" stroke-width="3"/>
+            <line x1="659" y1="326" x2="721" y2="264" stroke="#2a2a2a" stroke-width="3"/>
+            <circle cx="690" cy="295" r="10" fill="#C40000"/>
+
+            <!-- Headlights (complex) -->
+            <ellipse cx="112" cy="220" rx="22" ry="14" fill="#FFD060" opacity="0.9"/>
+            <ellipse cx="112" cy="220" rx="14" ry="9"  fill="#FFFFFF"/>
+            <ellipse cx="112" cy="220" rx="6"  ry="4"  fill="#E8F4FF"/>
+            <!-- DRL strip -->
+            <path d="M108 206 Q118 200 130 205" stroke="#FFE090" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+            <!-- Taillights -->
+            <rect x="790" y="200" width="16" height="28" rx="3" fill="#FF1500" opacity="0.95"/>
+            <rect x="793" y="204" width="10" height="20" rx="2" fill="#FF4030" opacity="0.7"/>
+
+            <!-- GT-R badge -->
+            <text x="450" y="200" text-anchor="middle" fill="rgba(255,255,255,0.08)"
+              font-family="Montserrat,sans-serif" font-weight="900" font-size="48"
+              letter-spacing="8">GT-R</text>
+
+            <!-- Side vent detail -->
+            <path d="M680 190 L700 192 L700 205 L680 205 Z" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <path d="M686 194 L695 195 L695 202 L686 202 Z" fill="rgba(0,0,0,0.6)"/>
+          </svg>
+        </div>
+
+        <!-- Glow underneath -->
+        <div class="car-glow" aria-hidden="true"></div>
+
+        <!-- Vertical label -->
+        <div class="specs-vertical-label" aria-hidden="true">NISSAN GT-R R35</div>
+      </div>
+
+      <!-- Right: spec cards -->
+      <div class="specs-cards">
+        <div class="specs-header">
+          <span class="label-tag">The Machine</span>
+          <h2>Engineered<br/>for <span class="red">Dominance</span></h2>
+          <p>A twin-turbocharged supercar that rewrote the rules of performance. Every component tuned to perfection.</p>
+        </div>
+
+        <div class="spec-list">
+
+          <div class="spec-row" tabindex="0">
+            <div class="spec-icon-wrap" aria-hidden="true">
+              <!-- Engine icon -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="14" width="24" height="16" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M14 14 V10 M20 14 V10 M26 14 V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M8 22 H4 M32 22 H36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="15" y="18" width="10" height="8" rx="1" fill="currentColor" opacity="0.2" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="spec-info">
+              <span class="spec-key">Engine</span>
+              <span class="spec-val"><span class="spec-num" data-target="3.8" data-decimal="1">3.8</span>L Twin-Turbo V6</span>
+            </div>
+            <div class="spec-bar-wrap" aria-hidden="true">
+              <div class="spec-bar"><div class="spec-bar-fill" style="--w:85%"></div></div>
+            </div>
+          </div>
+
+          <div class="spec-row" tabindex="0">
+            <div class="spec-icon-wrap" aria-hidden="true">
+              <!-- Power icon -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 6 L8 22 H18 L14 34 L32 18 H22 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="currentColor" opacity="0.15"/>
+              </svg>
+            </div>
+            <div class="spec-info">
+              <span class="spec-key">Horsepower</span>
+              <span class="spec-val"><span class="spec-num" data-target="565" data-decimal="0">565</span> <em>hp</em></span>
+            </div>
+            <div class="spec-bar-wrap" aria-hidden="true">
+              <div class="spec-bar"><div class="spec-bar-fill" style="--w:93%"></div></div>
+            </div>
+          </div>
+
+          <div class="spec-row" tabindex="0">
+            <div class="spec-icon-wrap" aria-hidden="true">
+              <!-- Clock icon -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M20 12 V20 L26 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="20" cy="8" r="1.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="spec-info">
+              <span class="spec-key">0 – 60 mph</span>
+              <span class="spec-val"><span class="spec-num" data-target="2.9" data-decimal="1">2.9</span> <em>sec</em></span>
+            </div>
+            <div class="spec-bar-wrap" aria-hidden="true">
+              <div class="spec-bar"><div class="spec-bar-fill" style="--w:98%"></div></div>
+            </div>
+          </div>
+
+          <div class="spec-row" tabindex="0">
+            <div class="spec-icon-wrap" aria-hidden="true">
+              <!-- Speedometer icon -->
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 28 A15 15 0 0 1 33 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M20 28 L27 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="20" cy="28" r="2.5" fill="currentColor"/>
+                <path d="M10 22 L12 24 M30 22 L28 24 M20 12 L20 15" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="spec-info">
+              <span class="spec-key">Top Speed</span>
+              <span class="spec-val"><span class="spec-num" data-target="196" data-decimal="0">196</span> <em>mph</em></span>
+            </div>
+            <div class="spec-bar-wrap" aria-hidden="true">
+              <div class="spec-bar"><div class="spec-bar-fill" style="--w:89%"></div></div>
+            </div>
+          </div>
+
+        </div><!-- /spec-list -->
+      </div><!-- /specs-cards -->
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FEATURES
+  ══════════════════════════════════════════════ -->
+  <section class="features" id="features" aria-label="Key features">
+    <div class="wrap">
+
+      <div class="section-head center">
+        <span class="label-tag">Why GT-R</span>
+        <h2>Built Without<br/><span class="red">Compromise</span></h2>
+      </div>
+
+      <div class="feat-grid">
+
+        <!-- Performance -->
+        <article class="feat-card" tabindex="0">
+          <div class="feat-num" aria-hidden="true">01</div>
+          <div class="feat-icon" aria-hidden="true">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+              <path d="M14 36 L22 24 L30 30 L38 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="38" cy="18" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Performance</h3>
+          <p>The ATTESA E-TS all-wheel-drive system and launch control deliver supercar acceleration from a dead stop. Zero compromises, zero excuses.</p>
+          <div class="feat-line" aria-hidden="true"></div>
+        </article>
+
+        <!-- Design -->
+        <article class="feat-card feat-card--accent" tabindex="0">
+          <div class="feat-num" aria-hidden="true">02</div>
+          <div class="feat-icon" aria-hidden="true">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 46 L28 10 L46 46 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" opacity="0.3"/>
+              <path d="M18 34 h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="28" cy="24" r="4" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Design</h3>
+          <p>Every curve channels airflow. The R35's aggressive aerodynamics generate downforce at speed — sculpted in vibrant red for maximum visual impact.</p>
+          <div class="feat-line" aria-hidden="true"></div>
+        </article>
+
+        <!-- Technology -->
+        <article class="feat-card" tabindex="0">
+          <div class="feat-num" aria-hidden="true">03</div>
+          <div class="feat-icon" aria-hidden="true">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="14" width="36" height="26" rx="4" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+              <circle cx="28" cy="27" r="7" stroke="currentColor" stroke-width="2"/>
+              <circle cx="28" cy="27" r="2.5" fill="currentColor"/>
+              <path d="M20 40 v5 M36 40 v5 M16 45 h24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Technology</h3>
+          <p>Over 1,000 onboard sensors feed real-time data to the GT-R's central computer, constantly optimising every millisecond of your drive.</p>
+          <div class="feat-line" aria-hidden="true"></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       RESERVATION
+  ══════════════════════════════════════════════ -->
+  <section class="reserve" id="reserve" aria-label="Test drive reservation">
+
+    <!-- Ambient bg glow -->
+    <div class="reserve-glow" aria-hidden="true"></div>
+
+    <div class="wrap reserve-wrap">
+
+      <!-- Left copy -->
+      <div class="reserve-copy">
+        <span class="label-tag">Limited Slots</span>
+        <h2>Reserve Your<br/><span class="red">GT-R Experience</span></h2>
+        <p>Claim your exclusive test drive slot. Our performance specialists will guide you through every rev of the legendary GT-R engine.</p>
+
+        <ul class="perks" aria-label="Reservation perks">
+          <li>
+            <span class="perk-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            No commitment required
+          </li>
+          <li>
+            <span class="perk-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Complimentary performance briefing
+          </li>
+          <li>
+            <span class="perk-check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Instant email confirmation
+          </li>
+        </ul>
+      </div>
+
+      <!-- Form panel -->
+      <div class="form-panel">
+        <form class="book-form" id="bookForm" novalidate aria-label="Reservation form">
+
+          <div class="field">
+            <label for="fname">Full Name <abbr title="required" class="req">*</abbr></label>
+            <input type="text"  id="fname" name="name"  placeholder="John Smith"
+              autocomplete="name" aria-required="true" aria-describedby="fname-err"/>
+            <span class="err-msg" id="fname-err" role="alert"></span>
+          </div>
+
+          <div class="field">
+            <label for="femail">Email Address <abbr title="required" class="req">*</abbr></label>
+            <input type="email" id="femail" name="email" placeholder="john@example.com"
+              autocomplete="email" aria-required="true" aria-describedby="femail-err"/>
+            <span class="err-msg" id="femail-err" role="alert"></span>
+          </div>
+
+          <div class="field">
+            <label for="fphone">Phone Number <abbr title="required" class="req">*</abbr></label>
+            <input type="tel"   id="fphone" name="phone" placeholder="+1 (555) 000-0000"
+              autocomplete="tel" aria-required="true" aria-describedby="fphone-err"/>
+            <span class="err-msg" id="fphone-err" role="alert"></span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="fdate">Preferred Date <abbr title="required" class="req">*</abbr></label>
+              <input type="date" id="fdate" name="date"
+                aria-required="true" aria-describedby="fdate-err"/>
+              <span class="err-msg" id="fdate-err" role="alert"></span>
+            </div>
+
+            <div class="field">
+              <label for="ftime">Preferred Time <abbr title="required" class="req">*</abbr></label>
+              <select id="ftime" name="time" aria-required="true" aria-describedby="ftime-err">
+                <option value="">Select time</option>
+                <option value="09:00">9:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+              </select>
+              <span class="err-msg" id="ftime-err" role="alert"></span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-red btn-full" id="submitBtn">
+            Reserve Your Seat
+          </button>
+
+        </form>
+
+        <!-- Success state -->
+        <div class="success-state" id="successState" hidden role="status" aria-live="polite">
+          <div class="success-ring" aria-hidden="true">
+            <svg viewBox="0 0 72 72" fill="none">
+              <circle cx="36" cy="36" r="30" stroke="currentColor" stroke-width="2"/>
+              <path d="M22 37 L31 46 L50 26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>You're Confirmed!</h3>
+          <p>Your test drive slot is reserved. Check your inbox for a confirmation email within minutes.</p>
+          <button class="btn btn-ghost" id="resetBtn">Book Another Date</button>
+        </div>
+
+      </div><!-- /form-panel -->
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap footer-wrap">
+
+      <div class="footer-brand">
+        <a href="#home" class="nav-logo" aria-label="GT-R Home">
+          <span>GT</span><span class="red">-R</span>
+        </a>
+        <p>Born on the track.<br/>Built for the road.</p>
+      </div>
+
+      <div class="footer-nav">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#specs">Specifications</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#reserve">Reserve</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <address>
+          <p>
+            <svg viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><path d="M2 3a1 1 0 011-1h1.8a1 1 0 01.986.836l.6 3.6a1 1 0 01-.54 1.06l-1.2.6a9.8 9.8 0 005.26 5.26l.6-1.2a1 1 0 011.06-.54l3.6.6A1 1 0 0116 13.2V15a1 1 0 01-1 1h-1C7.163 16 2 10.837 2 4V3z"/></svg>
+            +1 (800) GTR-DRIVE
+          </p>
+          <p>
+            <svg viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><path d="M1 4a1 1 0 011-1h14a1 1 0 011 1v.5L9 9.5 1 4.5V4zm0 2.5V13a1 1 0 001 1h14a1 1 0 001-1V6.5L9 11.5 1 6.5z"/></svg>
+            info@nissan-gtr-test.com
+          </p>
+          <p>
+            <svg viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9 1a6 6 0 016 6c0 4-6 10-6 10S3 11 3 7a6 6 0 016-6zm0 8a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+            123 Performance Drive, Tokyo
+          </p>
+        </address>
+      </div>
+
+      <div class="footer-social">
+        <h4>Follow</h4>
+        <div class="social-row">
+          <a href="#" class="soc-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" class="soc-btn" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="#" class="soc-btn" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 00.5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 002.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.55a3.02 3.02 0 002.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+            </svg>
+          </a>
+          <a href="#" class="soc-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.88v2.26h3.33l-.53 3.49h-2.8V24C19.62 23.1 24 18.1 24 12.07z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bar">
+      <p>&copy; <span id="yr"></span> Nissan GT-R Test Drive Experience. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
