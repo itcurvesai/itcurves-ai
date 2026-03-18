@@ -85,30 +85,37 @@
        Full-screen loop; appears as user scrolls in
   ══════════════════════════════════════════════ -->
   <section class="video-showcase" id="videoShowcase" aria-label="GT-R in motion">
-    <div class="video-showcase-inner" id="videoShowcaseInner">
+    <div class="video-showcase-layout">
 
-      <!-- Looping video — paused until scroll-in -->
-      <video
-        class="showcase-vid"
-        muted loop playsinline
-        preload="metadata"
-        aria-hidden="true"
-      >
-        <source src="nissan-gtr-video.mp4" type="video/mp4" />
-      </video>
+      <!-- 80% — video panel (clip-path animated) -->
+      <div class="video-showcase-inner" id="videoShowcaseInner">
 
-      <!-- Dark gradient overlay -->
-      <div class="showcase-overlay" aria-hidden="true"></div>
+        <!-- Looping video — paused until scroll-in -->
+        <video
+          class="showcase-vid"
+          muted loop playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="nissan-gtr-video.mp4" type="video/mp4" />
+        </video>
 
-      <!-- Minimal cinematic text -->
-      <div class="showcase-text">
-        <span class="label-tag">Nissan GT-R R35</span>
-        <h2 class="showcase-title">Engineered<br/><span class="red">to Dominate</span></h2>
-        <p class="showcase-sub">565 horsepower. All-wheel drive. Born on the Nürburgring.</p>
+        <!-- Dark gradient overlay -->
+        <div class="showcase-overlay" aria-hidden="true"></div>
+
+        <!-- Decorative corner-frame lines -->
+        <div class="showcase-frame" aria-hidden="true"></div>
+
       </div>
 
-      <!-- Decorative corner-frame lines -->
-      <div class="showcase-frame" aria-hidden="true"></div>
+      <!-- 20% — text panel (beside video, no overlap) -->
+      <div class="showcase-side">
+        <div class="showcase-text">
+          <span class="label-tag">Nissan GT-R R35</span>
+          <h2 class="showcase-title">Engineered<br/><span class="red">to Dominate</span></h2>
+          <p class="showcase-sub">565 horsepower. All-wheel drive. Born on the Nürburgring.</p>
+        </div>
+      </div>
 
     </div>
   </section>

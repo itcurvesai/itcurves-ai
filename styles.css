@@ -704,10 +704,18 @@ h3 {
   background: var(--black);
 }
 
-/* Inner wrapper is what gets clip-path animated */
+/* Flex layout: 20% text (left) | 80% video (right) */
+.video-showcase-layout {
+  display: flex;
+  flex-direction: row-reverse; /* video on right, text on left */
+  width: 100%;
+  height: 100%;
+}
+
+/* Inner wrapper is what gets clip-path animated — 80% panel */
 .video-showcase-inner {
   position: relative;
-  width: 100%;
+  flex: 0 0 80%;
   height: 100%;
   overflow: hidden;
 
@@ -718,6 +726,17 @@ h3 {
 /* JS adds this class when section enters viewport */
 .video-showcase-inner.vs-revealed {
   clip-path: inset(0% 0% round 0px);
+}
+
+/* 20% text panel — sits beside the video, no overlap */
+.showcase-side {
+  flex: 0 0 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: var(--dark-01);
+  border-right: 1px solid rgba(255,255,255,0.06); /* divider between text and video */
 }
 
 /* The looping background video */
@@ -752,13 +771,9 @@ h3 {
   pointer-events: none;
 }
 
-/* Text block — pinned to the left, width-capped so it never bleeds over the video subject */
+/* Text block — in its own 20% panel, fades up when clip-path opens */
 .showcase-text {
-  position: absolute;
-  bottom: 11%;
-  left: 7%;
-  z-index: 2;
-  max-width: 38%;        /* stays in the dark left zone */
+  position: relative;
   text-align: left;
   opacity: 0;
   transform: translateY(28px);
@@ -767,17 +782,18 @@ h3 {
     opacity   0.85s var(--ease) 0.65s,
     transform 0.85s var(--ease) 0.65s;
 }
-.video-showcase-inner.vs-revealed .showcase-text {
+/* Trigger via sibling selector: when video inner gets vs-revealed, fade text in */
+#videoShowcaseInner.vs-revealed ~ .showcase-side .showcase-text {
   opacity: 1;
   transform: none;
 }
 
 .showcase-title {
   font-family: var(--f-head);
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.7rem); /* scaled to fit 20% panel without cropping */
   font-weight: 900;
-  line-height: 1.06;
-  letter-spacing: -0.025em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   color: var(--white);
   margin-bottom: 0.85rem;
   text-shadow: 0 2px 36px rgba(0, 0, 0, 0.85);
@@ -829,10 +845,11 @@ h3 {
 
 /* ── Responsive ────────────────────────────────── */
 @media (max-width: 767px) {
-  .video-showcase         { height: 62vh; }
+  .video-showcase         { height: auto; min-height: 62vh; }
+  .video-showcase-layout  { flex-direction: column; }
+  .video-showcase-inner   { flex: 0 0 80%; height: 80vw; min-height: 240px; clip-path: inset(46% 4% round 4px); }
+  .showcase-side          { flex: 1 1 auto; border-left: none; border-top: 1px solid rgba(255,255,255,0.04); padding: 1.5rem; }
   .showcase-title         { font-size: clamp(1.55rem, 6vw, 2.1rem); }
-  .showcase-text          { left: 5%; bottom: 8%; max-width: 68%; }
-  .video-showcase-inner   { clip-path: inset(46% 4% round 4px); }
 }
 
 /* ══════════════════════════════════════════════════════════════
