@@ -146,6 +146,28 @@
 })();
 
 /* ══════════════════════════════════════════════
+   6b. VIDEO PLAY / PAUSE ON SCROLL VISIBILITY
+       Plays seamlessly when hero is in view,
+       pauses when scrolled away, resumes on return
+══════════════════════════════════════════════ */
+(function initVideoVisibility() {
+  const video = document.querySelector('.hero-vid');
+  if (!video) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        video.play().catch(() => {}); // resume seamless loop
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  io.observe(video);
+})();
+
+/* ══════════════════════════════════════════════
    7. INTERSECTION OBSERVER — fade-up on scroll
 ══════════════════════════════════════════════ */
 (function initFadeUp() {
@@ -239,9 +261,16 @@
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      animateCount(entry.target);
-      io.unobserve(entry.target);
+      if (entry.isIntersecting) {
+        // Animate up from 0 each time section enters view
+        animateCount(entry.target);
+      } else {
+        // Reset to 0 so next scroll-in re-triggers cleanly
+        const numEl   = entry.target.querySelector('.stat-num');
+        const decimal = parseInt(entry.target.dataset.decimal || '0', 10);
+        const suffix  = entry.target.dataset.suffix || '';
+        if (numEl) numEl.textContent = (0).toFixed(decimal) + suffix;
+      }
     });
   }, { threshold: 0.4 });
 
@@ -280,9 +309,14 @@
 
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      runCount(entry.target);
-      io.unobserve(entry.target);
+      if (entry.isIntersecting) {
+        // Animate up from 0 each time specs section enters view
+        runCount(entry.target);
+      } else {
+        // Reset to 0 so next scroll-in re-triggers cleanly
+        const decimal = parseInt(entry.target.dataset.decimal || '0', 10);
+        entry.target.textContent = (0).toFixed(decimal);
+      }
     });
   }, { threshold: 0.5 });
 
